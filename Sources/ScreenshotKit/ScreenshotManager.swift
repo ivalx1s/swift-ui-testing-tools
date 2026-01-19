@@ -12,6 +12,7 @@ import XCTest
 /// Naming format: `Run_{session}__Test_{name}__Step_{NN}__{timestamp}__{description}`
 ///
 /// Example: `Run_2026-01-15_17-58-28__Test_testLogin__Step_01__17-58-31-280__app_launched`
+@MainActor
 public final class ScreenshotManager {
     public static let shared = ScreenshotManager()
 

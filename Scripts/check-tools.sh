@@ -57,10 +57,10 @@ check "Swift toolchain" \
     "which swift" \
     "Install Xcode or Swift toolchain from swift.org"
 
-# Swift version 5.9+
-check "Swift 5.9+" \
-    "swift --version | grep -E 'Swift version [5-9]\.[9]|Swift version [6-9]\.|Swift version [1-9][0-9]\.'" \
-    "Update Xcode or Swift toolchain"
+# Swift version 6.0+
+check "Swift 6.0+" \
+    "swift --version | grep -E 'Swift version [6-9]\.|Swift version [1-9][0-9]\.'" \
+    "Update Xcode 16+ or Swift toolchain"
 
 # simctl (iOS Simulator)
 check "simctl (Simulator)" \

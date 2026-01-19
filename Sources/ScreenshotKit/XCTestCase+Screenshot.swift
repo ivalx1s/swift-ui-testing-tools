@@ -14,12 +14,14 @@ public extension XCTestCase {
     ///   - step: Step number (1-based)
     ///   - description: Short description (use snake_case)
     ///   - app: The XCUIApplication instance
+    @MainActor
     func screenshot(step: Int, _ description: String, app: XCUIApplication) {
         ScreenshotManager.shared.capture(step: step, description, app: app, testCase: self)
     }
 
     /// Call at the start of each test to register the test name.
+    @MainActor
     func startTestScreenshots() {
-        ScreenshotManager.shared.startTest(named: self.name ?? "unknown")
+        ScreenshotManager.shared.startTest(named: self.name)
     }
 }
