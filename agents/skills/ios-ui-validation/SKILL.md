@@ -52,7 +52,7 @@ Common issues and fixes:
 
 ## Core Components
 
-### 1. TestingTools Package
+### 1. UITestToolkit Package
 
 SPM package providing:
 - **ScreenshotKit** - capture screenshots with structured naming
@@ -106,7 +106,7 @@ cp -r assets/UIStruct/ ./AppUITests/UIStruct/
 ```
 
 Add to Xcode:
-- **TestingTools** as SPM dependency (local clone or git URL)
+- **UITestToolkit** as SPM dependency (local clone or git URL)
 - **TestEnvShared** to both app and test target compile sources
 - **ScreenshotKit + UITestKit** dependencies to UI test target
 
@@ -197,7 +197,7 @@ final class AuthTests: BaseUITestSuite, AllureTrackable {
 **Option A: One command (recommended)**
 
 ```bash
-# From TestingTools directory:
+# From UITestToolkit directory:
 ./Scripts/run-tests-and-extract.sh -workspace /path/to/App.xcworkspace -scheme App
 
 # With custom simulator:
@@ -215,7 +215,7 @@ xcodebuild test \
 
 # Find latest xcresult and extract
 XCRESULT=$(ls -td ~/Library/Developer/Xcode/DerivedData/*/Logs/Test/*.xcresult 2>/dev/null | head -1)
-swift run --package-path /path/to/TestingTools extract-screenshots "$XCRESULT" ".temp/screenshots"
+swift run --package-path /path/to/UITestToolkit extract-screenshots "$XCRESULT" ".temp/screenshots"
 ```
 
 **MANDATORY: Always extract screenshots after test run.** Don't skip this step.

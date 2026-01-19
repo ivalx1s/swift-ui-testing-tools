@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "TestingTools",
+    name: "UITestToolkit",
     platforms: [
         .iOS(.v15),
         .macOS(.v13)
