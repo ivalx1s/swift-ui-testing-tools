@@ -119,7 +119,7 @@ Includes `ios-ui-validation` skill for AI-assisted UI test development.
 ## Requirements
 
 - iOS 15.0+ / macOS 13.0+
-- Swift 6.0+
-- Xcode 16.0+
+- Swift 6.2+
+- Xcode 26+
 
 Run `./Scripts/check-tools.sh` to verify.
