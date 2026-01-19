@@ -86,9 +86,17 @@ final class MyUITests: BaseUITestSuite {
 # Check prerequisites
 ./Scripts/check-tools.sh
 
-# Run tests and extract screenshots
-./Scripts/run-tests-and-extract.sh -workspace App.xcworkspace -scheme App
+# Run tests and extract screenshots (run from your project directory!)
+cd /path/to/your/project
+~/src/swift-ui-testing-tools/Scripts/run-tests-and-extract.sh \
+  -workspace App.xcworkspace \
+  -scheme App \
+  -output .temp/screenshots
 ```
+
+Options:
+- `-output dir` — where to put screenshots (default: `.temp/{timestamp}_screenshots`, relative to CWD)
+- `-destination "..."` — simulator to use (default: iPhone 16)
 
 ## Project Structure
 

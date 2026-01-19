@@ -196,28 +196,51 @@ final class AuthTests: BaseUITestSuite, AllureTrackable {
 
 **After EVERY test run, extract screenshots to `.temp/` (gitignored).**
 
+**IMPORTANT: Run from your project directory** so screenshots land in your project's `.temp/`, not the toolkit's.
+
 **Option A: One command (recommended)**
 
 ```bash
-# From UITestToolkit directory:
-./Scripts/run-tests-and-extract.sh -workspace /path/to/App.xcworkspace -scheme App
+# Run from YOUR PROJECT directory (not toolkit directory!)
+cd /path/to/your/project
+
+# Path to toolkit (adjust as needed)
+TOOLKIT=~/src/swift-ui-testing-tools
+
+# Run tests and extract — output goes to .temp/ of current directory
+$TOOLKIT/Scripts/run-tests-and-extract.sh \
+  -workspace App.xcworkspace \
+  -scheme App \
+  -output .temp/screenshots
 
 # With custom simulator:
-./Scripts/run-tests-and-extract.sh -workspace App.xcworkspace -scheme App -destination "platform=iOS Simulator,name=iPhone 15 Pro"
+$TOOLKIT/Scripts/run-tests-and-extract.sh \
+  -workspace App.xcworkspace \
+  -scheme App \
+  -destination "platform=iOS Simulator,name=iPhone 15 Pro" \
+  -output .temp/screenshots
 ```
+
+Options:
+- `-output dir` — where to put screenshots (default: `.temp/{timestamp}_screenshots`)
+- `-destination "..."` — simulator to use (default: iPhone 16)
 
 **Option B: Manual steps**
 
 ```bash
-# Run tests
+# Run from your project directory
+cd /path/to/your/project
+
+# Run tests (xcresult goes to .temp/)
 xcodebuild test \
   -workspace App.xcworkspace \
   -scheme App \
-  -destination "platform=iOS Simulator,name=iPhone 16"
+  -destination "platform=iOS Simulator,name=iPhone 16" \
+  -resultBundlePath .temp/latest.xcresult
 
-# Find latest xcresult and extract
-XCRESULT=$(ls -td ~/Library/Developer/Xcode/DerivedData/*/Logs/Test/*.xcresult 2>/dev/null | head -1)
-swift run --package-path /path/to/UITestToolkit extract-screenshots "$XCRESULT" ".temp/screenshots"
+# Extract screenshots to .temp/
+swift run --package-path ~/src/swift-ui-testing-tools \
+  extract-screenshots .temp/latest.xcresult .temp/screenshots
 ```
 
 **MANDATORY: Always extract screenshots after test run.** Don't skip this step.
@@ -225,7 +248,7 @@ swift run --package-path /path/to/UITestToolkit extract-screenshots "$XCRESULT" 
 ### 7. Review Screenshots (MANDATORY)
 
 ```
-.temp/2026-01-16_12-38-13_screenshots/
+.temp/screenshots/                          # if -output .temp/screenshots
   Run_2026-01-16_12-38-13/
     Test_testLoginFlow/
       Step_01__18-12-25-546__login_screen.png
